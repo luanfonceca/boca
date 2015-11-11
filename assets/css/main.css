@@ -155,7 +155,7 @@
 		transition: opacity 2s ease-in-out;
 		height: 100%;
 		left: 0;
-		opacity: 0.25;
+		opacity: 0.75;
 		position: fixed;
 		top: 0;
 		width: 100%;
@@ -980,6 +980,13 @@
 			background-color: #E62F56;
 		}
 
+		input[type="submit"].hvr-back-pulse {
+			background-color: #E62F56 !important;
+		}
+		input[type="submit"].hvr-back-pulse:hover {
+		    background-color: #AAAAAA !important;
+		}
+
 		input[type="submit"]:active,
 		input[type="reset"]:active,
 		input[type="button"]:active,
@@ -1148,14 +1155,14 @@
 /* Footer */
 
 	#footer {
-		-moz-transition: opacity 0.5s ease-in-out;
+		/*-moz-transition: opacity 0.5s ease-in-out;
 		-webkit-transition: opacity 0.5s ease-in-out;
 		-ms-transition: opacity 0.5s ease-in-out;
-		transition: opacity 0.5s ease-in-out;
+		transition: opacity 0.5s ease-in-out;*/
+		/*opacity: 1;*/
 		bottom: 4em;
 		color: rgba(255, 255, 255, 0.5);
 		left: 4em;
-		opacity: 0.5;
 		position: absolute;
 	}
 

@@ -22,14 +22,14 @@
   // Vars.
     var $body = document.querySelector('body');
 
-  // Disable animations/transitions until everything's loaded.
-    $body.classList.add('is-loading');
+  // // Disable animations/transitions until everything's loaded.
+  //   $body.classList.add('is-loading');
 
-    window.addEventListener('load', function() {
-      window.setTimeout(function() {
-        $body.classList.remove('is-loading');
-      }, 100);
-    });
+  //   window.addEventListener('load', function() {
+  //     window.setTimeout(function() {
+  //       $body.classList.remove('is-loading');
+  //     }, 100);
+  //   });
 
   // Slideshow Background.
     (function() {
@@ -39,13 +39,14 @@
 
           // Images (in the format of 'url': 'alignment').
             images: {
-              'images/bg01.jpg': 'center',
-              'images/bg02.jpg': 'center',
-              'images/bg03.jpg': 'center'
+              'images/bg-dark.jpg': 'center',
+              // 'images/bg01.jpg': 'center',
+              // 'images/bg02.jpg': 'center',
+              // 'images/bg03.jpg': 'center'
             },
 
           // Delay.
-            delay: 6000
+            delay: 0
 
         };
 
@@ -81,26 +82,26 @@
           ||  !canUse('transition'))
             return;
 
-        window.setInterval(function() {
+        // window.setInterval(function() {
 
-          lastPos = pos;
-          pos++;
+        //   lastPos = pos;
+        //   pos++;
 
-          // Wrap to beginning if necessary.
-            if (pos >= $bgs.length)
-              pos = 0;
+        //   // Wrap to beginning if necessary.
+        //     if (pos >= $bgs.length)
+        //       pos = 0;
 
-          // Swap top images.
-            $bgs[lastPos].classList.remove('top');
-            $bgs[pos].classList.add('visible');
-            $bgs[pos].classList.add('top');
+        //   // Swap top images.
+        //     $bgs[lastPos].classList.remove('top');
+        //     $bgs[pos].classList.add('visible');
+        //     $bgs[pos].classList.add('top');
 
-          // Hide last image after a short delay.
-            window.setTimeout(function() {
-              $bgs[lastPos].classList.remove('visible');
-            }, settings.delay / 2);
+        //   // Hide last image after a short delay.
+        //     window.setTimeout(function() {
+        //       $bgs[lastPos].classList.remove('visible');
+        //     }, settings.delay / 2);
 
-        }, settings.delay);
+        // }, settings.delay);
 
     })();
 
@@ -185,11 +186,11 @@
               if (!response[0].reject_reason) {
                 $feedback._show('success', 'Obrigado!');
               } else {
-                showMessage('danger', response[0].reject_reason);
+                $feedback._show('failure', response[0].reject_reason);
               }
             })
             .fail(function(response) {
-              showMessage('danger', 'Não conseguimos enviar seu Email');
+              $feedback._show('failure', 'Não conseguimos enviar seu Email');
             });
 
             // Reset form.
