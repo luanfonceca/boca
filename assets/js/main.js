@@ -118,6 +118,10 @@
             $data,
             $feedback;
 
+        if (!$form) {
+          return;
+        };
+
       // Bail if addEventListener isn't supported.
         if (!('addEventListener' in $form))
           return;
@@ -184,7 +188,8 @@
             })
             .done(function(response) {
               if (!response[0].reject_reason) {
-                $feedback._show('success', 'Obrigado!');
+                var oldUrl = window.location.href;
+                window.location.href = oldUrl.replace('index', 'obrigado');
               } else {
                 $feedback._show('failure', response[0].reject_reason);
               }
