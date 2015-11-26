@@ -188,8 +188,17 @@
             })
             .done(function(response) {
               if (!response[0].reject_reason) {
-                var oldUrl = window.location.href;
-                window.location.href = oldUrl.replace('index', 'obrigado');
+                var newUrl;
+                var url = window.location.href;
+
+                if (url.match('index/$') != null) {
+                  newUrl = url + 'obrigado.html';
+                } else if (url.match('/boca/$') != null) {
+                  newUrl = url + 'obrigado/';
+                } else {
+                  newUrl = url.replace('index', 'obrigado');
+                }
+                window.location.href = newUrl;
               } else {
                 $feedback._show('failure', response[0].reject_reason);
               }
