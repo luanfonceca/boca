@@ -191,12 +191,10 @@
                 var newUrl;
                 var url = window.location.href;
 
-                if (url.match('index/$') != null) {
-                  newUrl = url + 'obrigado.html';
-                } else if (url.match('/boca/$') != null) {
-                  newUrl = url + 'obrigado/';
-                } else {
+                if (url.match('index.html$')) {
                   newUrl = url.replace('index', 'obrigado');
+                } else if (url.match('/boca/$')) {
+                  newUrl = url + 'obrigado.html';
                 }
                 window.location.href = newUrl;
               } else {
