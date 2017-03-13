@@ -155,50 +155,43 @@
           event.preventDefault();
 
           // Hide message.
-            $feedback._hide();
+          $feedback._hide();
 
           // Disable submit.
-            $submit.disabled = true;
+              $submit.disabled = true;
 
           // Process form.
             var toMessage = $message.replace('{{FROM_EMAIL}}', $fromEmail.value);
             $.ajax({
               type: 'POST',
-              url: 'https://mandrillapp.com/api/1.0/messages/send.json',
+              url: 'https://statical.herokuapp.com/send/',
               data: {
-                'key': 'B9Ny1dKD1C2b_YZH-yT8TA',
-                'message': {
-                  'from_email': $fromEmail.value,
-                  'from_name': $fromName,
-                  'headers': {
-                    'Reply-To': $fromEmail.value
-                  },
-                  'subject': 'Contato através do site da Boca',
-                  'html': toMessage,
-                  'auto_text': true,
-                  'to': [
-                    {
-                      'email': $toEmail,
-                      'name': $toName,
-                      'type': 'to'
-                    }
-                  ],
-                },
+                'message': toMessage,
+                'subject': 'Contato através do site da Boca',
+                'email': $fromEmail.value,
+                'name': $fromName,
+                'to_email': $toEmail,
+                'to_name': $toName,
               }
             })
             .done(function(response) {
-              if (!response[0].reject_reason) {
+              if (response.message == 'success') {
                 var newUrl;
                 var url = window.location.href;
 
                 if (url.match('index.html$')) {
                   newUrl = url.replace('index', 'obrigado');
-                } else if (url.match('/boca/$')) {
+                } else if (url.match('.com$')) {
+                  newUrl = url + '/obrigado.html';
+                } else if (url.match('.com/$')) {
                   newUrl = url + 'obrigado.html';
+                } else {
+                  // This will work only in hosted sites.
+                  newUrl = window.location.origin + '/obrigado.html';
                 }
                 window.location.href = newUrl;
               } else {
-                $feedback._show('failure', response[0].reject_reason);
+                $feedback._show('failure', 'Não conseguimos enviar seu Email');
               }
             })
             .fail(function(response) {
